@@ -15,8 +15,12 @@
                 >
                      <el-menu-item index="1" @click="goToAnchor('#article')">文章</el-menu-item>
                      <el-menu-item index="2">笔记</el-menu-item>
-                     <el-menu-item index="3">登录</el-menu-item>
-                     <el-menu-item index="4">注册</el-menu-item>
+                     <el-menu-item index="3"> 
+                         <router-link to="/login">登录</router-link> 
+                     </el-menu-item>
+                     <el-menu-item index="4">
+                          <router-link to="/register">注册</router-link> 
+                         </el-menu-item>
                  </el-menu>
               </div>
               <!-- 导航区 -->
