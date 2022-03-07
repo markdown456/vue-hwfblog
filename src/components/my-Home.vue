@@ -14,7 +14,9 @@
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                 >
                      <el-menu-item index="1" @click="goToAnchor('#article')">文章</el-menu-item>
-                     <el-menu-item index="2">笔记</el-menu-item>
+                     <el-menu-item index="2">
+                         <router-link to="/notes">笔记</router-link> 
+                    </el-menu-item>
                      <el-menu-item index="3"> 
                          <router-link to="/login">登录</router-link> 
                      </el-menu-item>
@@ -76,100 +78,103 @@
 
         <!-- 主体内容 -->
       <div class="content">
-          <ul id="article">
-              <li class="box"> 
-                  <div class="pic">
-                      <a href="#"><img src="../assets/pics/listpic1.jpg" alt=""></a>
-                  </div>
-                  <div class="ptitle">
-                      <span>
-                            <a href="#" class="articletitle">Ubuntu 16.04 环境安装部署</a>
-                      </span>
-                      <p>项目布署文档</p>
-                      <span>
-                          <i class="el-icon-collection-tag">&nbsp;入门</i>
-                          <i class="el-icon-collection-tag">&nbsp;Ubuntu</i>
-                          <i class="el-icon-collection-tag">&nbsp;Linux</i>
-                          <i class="el-icon-collection-tag">&nbsp;PHP  </i>
-                     </span>
-                      <div class="info">
-                          <i class="el-icon-user">&nbsp;Huangweifeng</i>
-                          <i class="el-icon-time">&nbsp;2年前</i>
-                          <i class="el-icon-view">&nbsp;12233</i>
-                          <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
-                      </div>
-                  </div>
-              </li>
-               <li class="box"> 
-                  <div class="pic">
-                      <a href="#"><img src="../assets/pics/listpic1.jpg" alt=""></a>
-                  </div>
-                  <div class="ptitle">
-                      <span>
-                            <a href="#" class="articletitle">Ubuntu 16.04 环境安装部署</a>
-                      </span>
-                      <p>项目布署文档</p>
-                      <span>
-                          <i class="el-icon-collection-tag">&nbsp;入门</i>
-                          <i class="el-icon-collection-tag">&nbsp;Ubuntu</i>
-                          <i class="el-icon-collection-tag">&nbsp;Linux</i>
-                          <i class="el-icon-collection-tag">&nbsp;PHP  </i>
-                     </span>
-                      <div class="info">
-                          <i class="el-icon-user">&nbsp;Huangweifeng</i>
-                          <i class="el-icon-time">&nbsp;2年前</i>
-                          <i class="el-icon-view">&nbsp;12233</i>
-                          <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
-                      </div>
-                  </div>
-              </li>
-               <li class="box"> 
-                  <div class="pic">
-                      <a href="#"><img src="../assets/pics/listpic1.jpg" alt=""></a>
-                  </div>
-                  <div class="ptitle">
-                      <span>
-                            <a href="#" class="articletitle">Ubuntu 16.04 环境安装部署</a>
-                      </span>
-                      <p>项目布署文档</p>
-                      <span>
-                          <i class="el-icon-collection-tag">&nbsp;入门</i>
-                          <i class="el-icon-collection-tag">&nbsp;Ubuntu</i>
-                          <i class="el-icon-collection-tag">&nbsp;Linux</i>
-                          <i class="el-icon-collection-tag">&nbsp;PHP  </i>
-                     </span>
-                      <div class="info">
-                          <i class="el-icon-user">&nbsp;Huangweifeng</i>
-                          <i class="el-icon-time">&nbsp;2年前</i>
-                          <i class="el-icon-view">&nbsp;12233</i>
-                          <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
-                      </div>
-                  </div>
-              </li>
-               <li class="box"> 
-                  <div class="pic">
-                      <a href="#"><img src="../assets/pics/listpic1.jpg" alt=""></a>
-                  </div>
-                  <div class="ptitle">
-                      <span>
-                            <a href="#" class="articletitle">Ubuntu 16.04 环境安装部署</a>
-                      </span>
-                      <p>项目布署文档</p>
-                      <span>
-                          <i class="el-icon-collection-tag">&nbsp;入门</i>
-                          <i class="el-icon-collection-tag">&nbsp;Ubuntu</i>
-                          <i class="el-icon-collection-tag">&nbsp;Linux</i>
-                          <i class="el-icon-collection-tag">&nbsp;PHP  </i>
-                     </span>
-                      <div class="info">
-                          <i class="el-icon-user">&nbsp;Huangweifeng</i>
-                          <i class="el-icon-time">&nbsp;2年前</i>
-                          <i class="el-icon-view">&nbsp;12233</i>
-                          <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
-                      </div>
-                  </div>
-              </li>
-          </ul>    
+          <router-link to="/article">
+             <ul id="article">
+                <li class="box"> 
+                    <div class="pic">
+                        <a href="#"><img src="../assets/pics/listpic1.jpg" alt=""></a>
+                    </div>
+                    <div class="ptitle">
+                        <span>
+                                <a href="#" class="articletitle">Ubuntu 16.04 环境安装部署</a>
+                        </span>
+                        <p>项目布署文档</p>
+                        <span>
+                            <i class="el-icon-collection-tag">&nbsp;入门</i>
+                            <i class="el-icon-collection-tag">&nbsp;Ubuntu</i>
+                            <i class="el-icon-collection-tag">&nbsp;Linux</i>
+                            <i class="el-icon-collection-tag">&nbsp;PHP  </i>
+                        </span>
+                        <div class="info">
+                            <i class="el-icon-user">&nbsp;Huangweifeng</i>
+                            <i class="el-icon-time">&nbsp;2年前</i>
+                            <i class="el-icon-view">&nbsp;12233</i>
+                            <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li class="box"> 
+                    <div class="pic">
+                        <a href="#"><img src="../assets/pics/listpic1.jpg" alt=""></a>
+                    </div>
+                    <div class="ptitle">
+                        <span>
+                                <a href="#" class="articletitle">Ubuntu 16.04 环境安装部署</a>
+                        </span>
+                        <p>项目布署文档</p>
+                        <span>
+                            <i class="el-icon-collection-tag">&nbsp;入门</i>
+                            <i class="el-icon-collection-tag">&nbsp;Ubuntu</i>
+                            <i class="el-icon-collection-tag">&nbsp;Linux</i>
+                            <i class="el-icon-collection-tag">&nbsp;PHP  </i>
+                        </span>
+                        <div class="info">
+                            <i class="el-icon-user">&nbsp;Huangweifeng</i>
+                            <i class="el-icon-time">&nbsp;2年前</i>
+                            <i class="el-icon-view">&nbsp;12233</i>
+                            <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li class="box"> 
+                    <div class="pic">
+                        <a href="#"><img src="../assets/pics/listpic1.jpg" alt=""></a>
+                    </div>
+                    <div class="ptitle">
+                        <span>
+                                <a href="#" class="articletitle">Ubuntu 16.04 环境安装部署</a>
+                        </span>
+                        <p>项目布署文档</p>
+                        <span>
+                            <i class="el-icon-collection-tag">&nbsp;入门</i>
+                            <i class="el-icon-collection-tag">&nbsp;Ubuntu</i>
+                            <i class="el-icon-collection-tag">&nbsp;Linux</i>
+                            <i class="el-icon-collection-tag">&nbsp;PHP  </i>
+                        </span>
+                        <div class="info">
+                            <i class="el-icon-user">&nbsp;Huangweifeng</i>
+                            <i class="el-icon-time">&nbsp;2年前</i>
+                            <i class="el-icon-view">&nbsp;12233</i>
+                            <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li class="box"> 
+                    <div class="pic">
+                        <a href="#"><img src="../assets/pics/listpic1.jpg" alt=""></a>
+                    </div>
+                    <div class="ptitle">
+                        <span>
+                                <a href="#" class="articletitle">Ubuntu 16.04 环境安装部署</a>
+                        </span>
+                        <p>项目布署文档</p>
+                        <span>
+                            <i class="el-icon-collection-tag">&nbsp;入门</i>
+                            <i class="el-icon-collection-tag">&nbsp;Ubuntu</i>
+                            <i class="el-icon-collection-tag">&nbsp;Linux</i>
+                            <i class="el-icon-collection-tag">&nbsp;PHP  </i>
+                        </span>
+                        <div class="info">
+                            <i class="el-icon-user">&nbsp;Huangweifeng</i>
+                            <i class="el-icon-time">&nbsp;2年前</i>
+                            <i class="el-icon-view">&nbsp;12233</i>
+                            <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </li>
+             </ul>   
+          </router-link>
+          
       </div>
       <!-- 主体内容 -->
 

@@ -2,16 +2,16 @@
     <div class="main">
          <div class="loginbox">
             <h1>MountainBlog</h1>
-            <el-form class="loginform"    label-width="80px">
-                <el-form-item>
-                    <el-input type="email"   placeholder="请输入手机号/邮箱/用户名"></el-input>
+            <el-form class="loginform" :rules="loginFormRules" ref="loginFormRef" :model="loginForm" label-width="80px">
+                <el-form-item prop="email">
+                    <el-input type="email" v-model="loginForm.email"   placeholder="请输入手机号/邮箱/用户名"></el-input>
                 </el-form-item>
-                <el-form-item prop="pass">
-                    <el-input type="password"  placeholder="密码"></el-input>
+                <el-form-item prop="password">
+                    <el-input type="password" v-model="loginForm.password"  placeholder="密码"></el-input>
                 </el-form-item>
                
                 <el-form-item>
-                    <el-button type="primary" class="loginbutton">登录</el-button>
+                    <el-button type="primary" @click="login()" class="loginbutton">登录</el-button>
                 </el-form-item>
             </el-form>
             <el-button type="primary" class="otherslogin">
@@ -32,34 +32,50 @@
 <script>
 export default {
     data() {
+         var checkEmail = (rule, value, callback) => {
+             const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+             if (!value) {
+                 return callback(new Error('邮箱不能为空'))
+             }
+             setTimeout(() => {
+                 if (mailReg.test(value.trim())) {
+                 callback()
+             } else {
+                 callback(new Error('请输入正确的邮箱格式'))
+             }
+         }, 100)
+        }
+
         return {
-            form: {
-                name: '',
-                region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
+            loginForm: {
+                email: '',
+                password: '',
             },
-            ruleForm: {
-                pass: '',
-                checkPass: '',
-                age: ''
-            },
-            rules: {
-                 pass: [
-                     { validator: validatePass, trigger: 'blur' }
+            loginFormRules: {
+                 email: [
+                     { validator: checkEmail, trigger: 'blur' }
                  ],
-                 checkPass: [
-                     { validator: validatePass2, trigger: 'blur' }
+                 password: [
+                     { required: true, message: '请输入登录密码', trigger: 'blur' },
+                     { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' },
                  ],
             }
         }      
     },
     methods: {
-        
+       //客户端处理登录,表单对象的validate方法，请求服务器验证登录
+       login() {
+           this.$refs.loginFormRef.validate(async valid => {
+               if(!valid) return;
+            // 1 向服务器请求数据，验证用户输入的信息是否正确
+            const result = await this.$http.post('admin/login',this.loginForm);
+            console.log(result);
+           if(result.status !==200) return this.$message.error(result.data.msg)
+            this.$message.success(result.data.msg)
+            //登录验证成功后，跳转至首页
+            this.$router.push('/notes')
+           })
+       } 
     }
 }
 </script>
