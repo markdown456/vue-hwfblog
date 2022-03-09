@@ -1,66 +1,15 @@
 <template>
     <div>
-        <!-- 头部 -->
-      <div class="header">
-          <!-- 头部导航区 -->
-          <div class="nav">
-              <!-- 博客logo区 -->
-              <div class="logo">
-                  <a href="#">Mountain Blog</a>
-                </div>
-              <!-- 博客logo区/ -->
-              <!-- 导航区 -->
-              <div class="navbar">
-                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
-                >
-                     <el-menu-item index="1" @click="goToAnchor('#article')">
-                        <router-link to="/home">文章</router-link> 
-                    </el-menu-item>
-                     <el-menu-item index="2">笔记</el-menu-item>
-                     <el-menu-item index="3"> 
-                         <router-link to="/login">登录</router-link> 
-                     </el-menu-item>
-                     <el-menu-item index="4">
-                          <router-link to="/register">注册</router-link> 
-                         </el-menu-item>
-                 </el-menu>
-              </div>
-              <!-- 导航区 -->
-
-              <!-- 搜索 -->
-              <div class="search">
-                 <el-input v-model="input" placeholder="搜索"></el-input>
-              </div>
-              <!-- 搜索 -->
-          </div>
-          <!-- 头部导航区 -->
-     </div> 
-        <!-- 头部 -->
-
         <!-- 主体内容 -->
       <div class="content">
          <div class="articlebox">
-             我的文章
+             <h1>{{articleDetail.title}}</h1>
+             <span class="articledate">&nbsp;{{articleDetail.date}}</span>
+             <p>{{articleDetail.content}}</p>
          </div>
       </div>
       <!-- 主体内容 -->
 
-      <!-- 底部 -->
-      <div class="footer">
-          <div class="fcontent">
-              <ul>
-                  <li><a href="http://www.qq.com"><span class="qq"></span></a></li>
-                  <li><a href="http://www.weibo.com"><span class="weibo"></span></a></li>
-                  <li><a href="https://github.com/markdown123"><span class="github"></span></a></li>
-              </ul>
-              <div class="secondfloor">
-                  <a href="https://www.csdn.net">友情链接</a>
-                  <a href="#">关于我</a>
-              </div>
-                <p>© Huang Weifeng 2022 . All rights reserved. </p>  
-          </div>
-      </div>
-      <!-- 底部 -->
     </div>
 </template>
 
@@ -70,13 +19,23 @@ export default {
         return {
             activeIndex: '1',
             input: '',
-            picdata: [{id:0,url:require('../assets/pic1.png')},{id:1,url:require('../assets/pic2.png')},{id:2,url:require('../assets/pic3.png')},{id:3,url:require('../assets/pic4.png')}]
+            picdata: [{id:0,url:require('../assets/pic1.png')},{id:1,url:require('../assets/pic2.png')},{id:2,url:require('../assets/pic3.png')},{id:3,url:require('../assets/pic4.png')}],
+            articleDetail: {}
         }
+    },
+    created() {
+        this.getArticleDetail()
     },
     methods: {
         handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
+      //请求服务器获取文章细节
+     async getArticleDetail() {
+         let id = this.$route.params.id
+         const res = await this.$http.get('admin/articleDetail/'+id);
+        this.articleDetail = res.data
+      }
     }
 }
 </script>
@@ -250,13 +209,24 @@ export default {
 }
 
 .content .articlebox {
-    width: 40%;
+    width: 60%;
     margin-top: 30px;
+    padding: 30px;
     background-color: #fcffff;
     border-radius: 10px;
     box-shadow: 2px 2px 10px #ccc;
 }
 
+.content .articlebox .articledate {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0 20px 0;
+    border-bottom: 1px solid #ccc;
+}
 
+.content .articlebox .articledate::before {
+    content: '\e94e';
+    font-family: 'icomoon'
+}
 
 </style>

@@ -1,42 +1,5 @@
 <template>
     <div>
-        <!-- 头部 -->
-      <div class="header">
-          <!-- 头部导航区 -->
-          <div class="nav">
-              <!-- 博客logo区 -->
-              <div class="logo">
-                  <a href="#">Mountain Blog</a>
-                </div>
-              <!-- 博客logo区/ -->
-              <!-- 导航区 -->
-              <div class="navbar">
-                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
-                >
-                     <el-menu-item index="1">
-                        <router-link to="/home">文章</router-link> 
-                    </el-menu-item>
-                     <el-menu-item index="2">笔记</el-menu-item>
-                     <el-menu-item index="3"> 
-                         <router-link to="/login">登录</router-link> 
-                     </el-menu-item>
-                     <el-menu-item index="4">
-                          <router-link to="/register">注册</router-link> 
-                         </el-menu-item>
-                 </el-menu>
-              </div>
-              <!-- 导航区 -->
-
-              <!-- 搜索 -->
-              <div class="search">
-                 <el-input v-model="input" placeholder="搜索"></el-input>
-              </div>
-              <!-- 搜索 -->
-          </div>
-          <!-- 头部导航区 -->
-     </div> 
-        <!-- 头部 -->
-
         <!-- 主体内容 -->
       <div class="content">
          <div class="notesbox">
@@ -58,23 +21,6 @@
          </div>
       </div>
       <!-- 主体内容 -->
-
-      <!-- 底部 -->
-      <div class="footer">
-          <div class="fcontent">
-              <ul>
-                  <li><a href="http://www.qq.com"><span class="qq"></span></a></li>
-                  <li><a href="http://www.weibo.com"><span class="weibo"></span></a></li>
-                  <li><a href="https://github.com/markdown123"><span class="github"></span></a></li>
-              </ul>
-              <div class="secondfloor">
-                  <a href="https://www.csdn.net">友情链接</a>
-                  <a href="#">关于我</a>
-              </div>
-                <p>© Huang Weifeng 2022 . All rights reserved. </p>  
-          </div>
-      </div>
-      <!-- 底部 -->
     </div>
 </template>
 
@@ -90,6 +36,14 @@ export default {
     methods: {
         handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+        toLogin() {
+          console.log(sessionStorage.getItem('token'));
+          if(sessionStorage.getItem('token')) {
+              this.$message.success('您已经登录');
+              return;
+          }
+          this.$router.push('/login')
       },
     }
 }

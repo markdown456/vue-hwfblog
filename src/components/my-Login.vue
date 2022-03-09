@@ -23,13 +23,18 @@
             <div><a href="#" class="forgetpwd">忘记密码？</a></div>
             <div>没有账户？
                 <router-link to="/register" class="toregister">注册</router-link>
-                </div>
+            </div>
+            <div>我不想登录，回到
+                <router-link to="/home" class="toregister">首页</router-link>
+              
+            </div>
         </div>
     </div>
    
 </template>
 
 <script>
+import {mapSate} from 'vuex'
 export default {
     data() {
          var checkEmail = (rule, value, callback) => {
@@ -48,8 +53,8 @@ export default {
 
         return {
             loginForm: {
-                email: '',
-                password: '',
+                email: this.$store.state.loginForm.email,
+                password: this.$store.state.loginForm.password,
             },
             loginFormRules: {
                  email: [
@@ -70,8 +75,14 @@ export default {
             // 1 向服务器请求数据，验证用户输入的信息是否正确
             const result = await this.$http.post('admin/login',this.loginForm);
             console.log(result);
-           if(result.status !==200) return this.$message.error(result.data.msg)
+           if(result.data.status !== 1) return this.$message.error(result.data.msg)
             this.$message.success(result.data.msg)
+           // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
+        //   1.1 项目中出了登录之外的其他API接口，必须在登录之后才能访问
+        //   1.2 token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage 中
+        window.sessionStorage.setItem('token', result.data.token)
+        //将store中loginForm状态改变
+        this.$store.commit('changeEmail',this.loginForm.email)
             //登录验证成功后，跳转至首页
             this.$router.push('/notes')
            })
