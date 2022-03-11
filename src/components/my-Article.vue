@@ -33,8 +33,18 @@ export default {
       //请求服务器获取文章细节
      async getArticleDetail() {
          let id = this.$route.params.id
-         const res = await this.$http.get('admin/articleDetail/'+id);
-        this.articleDetail = res.data
+         let type = this.$route.params.type
+         if(type == 'art') {
+             //文章详情页
+             const res = await this.$http.get('admin/articleDetail/'+id);
+            this.articleDetail = res.data
+         } else {
+             //笔记详情页
+             const res = await this.$http.get('admin/noteDetail/'+id);
+             console.log(res)
+              this.articleDetail = res.data
+         }
+         
       }
     }
 }

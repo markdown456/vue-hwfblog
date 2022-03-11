@@ -3,21 +3,9 @@
         <!-- 主体内容 -->
       <div class="content">
          <div class="notesbox">
-             <router-link to="/article">
                 <ul>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
-                    <li>我的第一条笔记</li>
+                    <li @click="toNoteDetail(item.id,item.type)" v-for="(item,index) in AllNoteList" :key="index">{{item.title}}</li>
                 </ul> 
-             </router-link>
-             
          </div>
       </div>
       <!-- 主体内容 -->
@@ -30,8 +18,12 @@ export default {
         return {
             activeIndex: '1',
             input: '',
-            picdata: [{id:0,url:require('../assets/pic1.png')},{id:1,url:require('../assets/pic2.png')},{id:2,url:require('../assets/pic3.png')},{id:3,url:require('../assets/pic4.png')}]
+            AllNoteList: [],
+           
         }
+    },
+    created() {
+        this.getAllNotes()
     },
     methods: {
         handleSelect(key, keyPath) {
@@ -45,6 +37,17 @@ export default {
           }
           this.$router.push('/login')
       },
+       //获取所有文章
+      async getAllNotes() {
+          const result = await this.$http.get('admin/noteList');
+          console.log(result);
+          this.AllNoteList = result.data;
+          console.log(this.AllNoteList)
+      },
+      //点击笔记，跳转至笔记详情页
+      toNoteDetail(id,type) {
+           this.$router.push('/article/'+id+'/'+type)
+      }
     }
 }
 </script>

@@ -13,16 +13,16 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
     routes: [
+        { path: '/', redirect: '/common' },
         { path: '/login', component: Login },
         { path: '/register', component: Register },
         {
             path: '/common',
             component: Common,
             children: [
-                { path: '/', redirect: '/home' },
                 { path: '/home', component: Home },
                 { path: '/notes', component: Notes },
-                { path: '/article/:id', component: Article },
+                { path: '/article/:id/:type', component: Article },
             ]
         }
 

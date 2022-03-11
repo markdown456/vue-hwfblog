@@ -20,9 +20,9 @@
                 <!-- 轮播图 -->
                 <div class="lunbotu">
                      <el-carousel height="587px" ref="carousel">
-                        <el-carousel-item name="index" v-for="(item,index) in picdata" :key="item.id">
+                        <el-carousel-item name="index" v-for="(item,index) in  AllArticleList" :key="item.id">
                             <!-- <h3 class="small">{{ item }}</h3> -->
-                            <img :src="item.url" alt="">
+                            <img :src="item.imgUrl" alt="">
                          </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -43,11 +43,11 @@
       <div class="content">
              <ul id="article" v-for="(item,index) in AllArticleList" :key="index">
                 <li class="box"> 
-                    <div class="pic" @click="toArticleDetail(item.id)">
+                    <div class="pic" @click="toArticleDetail(item.id,item.type)">
                         <a href="#"><img :src="item.imgUrl" alt=""></a>
                     </div>
                     <div class="ptitle">
-                        <span @click="toArticleDetail(item.id)">
+                        <span @click="toArticleDetail(item.id,item.type)">
                                 <a href="#" class="articletitle">{{item.title}}</a>
                         </span>
                         <p>项目布署文档</p>
@@ -145,9 +145,9 @@ export default {
           console.log(this.AllArticleList)
       },
       //点击文章，跳转至文章详细
-     toArticleDetail(id) {
+     toArticleDetail(id,type) {
          console.log(id)
-         this.$router.push('/article/'+id)
+         this.$router.push('/article/'+id+'/'+type)
       }
     }
 }

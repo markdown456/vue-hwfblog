@@ -89,6 +89,12 @@ export default {
           this.$refs.carousel.setActiveItem(id);
       },
      goToAnchor(selector) {
+        if(!this.$el.querySelector(selector))  {
+            //若不是首页，则直接返回首页
+            this.$router.push('/home')
+            return;
+
+        }
           this.$el.querySelector(selector).scrollIntoView({
               behavior: 'smooth',
               block:'start'
@@ -103,7 +109,6 @@ export default {
               token: sessionStorage.getItem('token')
           }
            const result = await this.$http.post('admin/notes',params);
-           console.log(result)
             this.isLogin = result.data.isValid;
            //isVaild是服务器响应的数据，该数据验证了token
            if(!result.data.isValid) {
@@ -128,13 +133,10 @@ export default {
       //获取所有文章
       async getAllArticle() {
           const result = await this.$http.get('admin/articleList');
-          console.log(result);
           this.AllArticleList = result.data;
-          console.log(this.AllArticleList)
       },
       //点击文章，跳转至文章详细
      toArticleDetail(id) {
-         console.log(id)
          this.$router.push('/article/'+id)
       }
     }
