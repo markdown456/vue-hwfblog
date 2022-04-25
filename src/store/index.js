@@ -9,6 +9,8 @@ export default new Vuex.Store({
         loginForm: {
             email: '',
             password: '',
+            //后台管理侧边栏，高亮显示的标签
+            activePath: '',
         }
     },
     getters: {},

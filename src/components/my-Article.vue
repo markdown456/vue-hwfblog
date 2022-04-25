@@ -5,10 +5,13 @@
          <div class="articlebox">
              <h1>{{articleDetail.title}}</h1>
              <span class="articledate">&nbsp;{{articleDetail.date}}</span>
-             <p>{{articleDetail.content}}</p>
+             <p v-html="articleDetail.content">{{articleDetail.content}}</p>
          </div>
       </div>
       <!-- 主体内容 -->
+
+      <!-- 评论区 -->
+      <router-view name="comment"></router-view>
 
     </div>
 </template>
@@ -19,7 +22,6 @@ export default {
         return {
             activeIndex: '1',
             input: '',
-            picdata: [{id:0,url:require('../assets/pic1.png')},{id:1,url:require('../assets/pic2.png')},{id:2,url:require('../assets/pic3.png')},{id:3,url:require('../assets/pic4.png')}],
             articleDetail: {}
         }
     },
@@ -33,18 +35,10 @@ export default {
       //请求服务器获取文章细节
      async getArticleDetail() {
          let id = this.$route.params.id
-         let type = this.$route.params.type
-         if(type == 'art') {
-             //文章详情页
+             //文章或笔记详情页
              const res = await this.$http.get('admin/articleDetail/'+id);
-            this.articleDetail = res.data
-         } else {
-             //笔记详情页
-             const res = await this.$http.get('admin/noteDetail/'+id);
-             console.log(res)
-              this.articleDetail = res.data
-         }
-         
+             console.log(res);
+            this.articleDetail = res;  
       }
     }
 }

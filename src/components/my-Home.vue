@@ -1,7 +1,7 @@
 <template>
     <div>
          <!-- 博主和课程介绍区 -->
-          <div class="introduction">
+          <div class="introduction" id="selfIntro">
               <!-- 左边博主介绍 -->
             <div class="bloger">
                 <div class="blogerInfo">
@@ -16,11 +16,11 @@
             </div>
             <!-- 左边博主介绍 -->
             <!-- 课程介绍 -->
-            <div class="course">
+            <div class="course" id="lbt">
                 <!-- 轮播图 -->
                 <div class="lunbotu">
                      <el-carousel height="587px" ref="carousel">
-                        <el-carousel-item name="index" v-for="(item,index) in  AllArticleList" :key="item.id">
+                        <el-carousel-item name="index" v-for="(item,index) in  AllArticleList" :key="index">
                             <!-- <h3 class="small">{{ item }}</h3> -->
                             <img :src="item.imgUrl" alt="">
                          </el-carousel-item>
@@ -39,15 +39,16 @@
           </div>
           <!-- 课程介绍 -->
          <!-- 博主和课程介绍区 -->
+
         <!-- 主体内容 -->
       <div class="content">
              <ul id="article" v-for="(item,index) in AllArticleList" :key="index">
                 <li class="box"> 
-                    <div class="pic" @click="toArticleDetail(item.id,item.type)">
+                    <div class="pic" @click="toArticleDetail(item._id)">
                         <a href="#"><img :src="item.imgUrl" alt=""></a>
                     </div>
                     <div class="ptitle">
-                        <span @click="toArticleDetail(item.id,item.type)">
+                        <span @click="toArticleDetail(item._id,item.type)">
                                 <a href="#" class="articletitle">{{item.title}}</a>
                         </span>
                         <p>项目布署文档</p>
@@ -61,7 +62,8 @@
                             <i class="el-icon-user">&nbsp;Huangweifeng</i>
                             <i class="el-icon-time">&nbsp;{{item.date}}</i>
                             <i class="el-icon-view">&nbsp;12233</i>
-                            <a href="#">Read More <i class="el-icon-arrow-right"></i></a>
+                            <span @click="toArticleDetail(item._id)">Read More&nbsp;&gt;</span>
+                            
                         </div>
                     </div>
                 </li>
@@ -78,7 +80,6 @@ export default {
         return {
             activeIndex: '1',
             input: '',
-            picdata: [{id:0,url:require('../assets/pic1.png')},{id:1,url:require('../assets/pic2.png')},{id:2,url:require('../assets/pic3.png')},{id:3,url:require('../assets/pic4.png')}],
             isLogin: false,
             AllArticleList: []
         }
@@ -140,14 +141,18 @@ export default {
       //获取所有文章
       async getAllArticle() {
           const result = await this.$http.get('admin/articleList');
-          console.log(result);
-          this.AllArticleList = result.data;
+          //将笔记内容过滤，只留下文章
+        let res = result.filter((item,index) =>{
+              return item.type == 'art'
+          })
+          console.log(res);
+          this.AllArticleList = res;
           console.log(this.AllArticleList)
       },
       //点击文章，跳转至文章详细
-     toArticleDetail(id,type) {
+     toArticleDetail(id) {
          console.log(id)
-         this.$router.push('/article/'+id+'/'+type)
+         this.$router.push('/article/'+id)
       }
     }
 }
@@ -346,7 +351,7 @@ export default {
 
 /* 主体内容区 */
 .content  {
-    width: 80%;
+    width: 70%;
     /* background-color: pink; */
     margin: 0 auto;
 }
@@ -360,7 +365,9 @@ export default {
 
 .content .box .pic {
     flex:1;
-    padding-right: 10px;
+    margin-right: 10px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .content .box .pic img {
@@ -408,14 +415,15 @@ export default {
     padding-right: 20px;
 }
 
-.content .box .ptitle .info a {
+.content .box .ptitle .info span {
     float:right;
     padding-right: 20px;
     color: #ccc;
 }
 
-.content .box .ptitle .info a:hover {
+.content .box .ptitle .info span:hover {
     color: #f2653b;
+    cursor: pointer;
 }
 
 </style>

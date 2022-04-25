@@ -4,7 +4,7 @@
       <div class="content">
          <div class="notesbox">
                 <ul>
-                    <li @click="toNoteDetail(item.id,item.type)" v-for="(item,index) in AllNoteList" :key="index">{{item.title}}</li>
+                    <li @click="toNoteDetail(item._id)" v-for="(item,index) in AllNoteList" :key="index">{{item.title}}</li>
                 </ul> 
          </div>
       </div>
@@ -39,14 +39,18 @@ export default {
       },
        //获取所有文章
       async getAllNotes() {
-          const result = await this.$http.get('admin/noteList');
-          console.log(result);
-          this.AllNoteList = result.data;
+          const result = await this.$http.get('admin/articleList');
+          //将文章过滤掉，只留下笔记
+          let res = result.filter((item,index) =>{
+              return item.type == 'note'
+          })
+          console.log(res);
+          this.AllNoteList = res;
           console.log(this.AllNoteList)
       },
       //点击笔记，跳转至笔记详情页
-      toNoteDetail(id,type) {
-           this.$router.push('/article/'+id+'/'+type)
+      toNoteDetail(id) {
+           this.$router.push('/article/'+id)
       }
     }
 }

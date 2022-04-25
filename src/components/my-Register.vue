@@ -104,7 +104,8 @@ export default {
              this.$refs.registerFormRef.validate(async valid => {
         if (!valid) return
         const result = await this.$http.post('admin/register', this.registerForm); 
-        if(result.status !== 200) return  this.$message.error(result.data.message)
+        console.log(result)
+        if(result.status !== 200) return  this.$message.error(result.message)
         this.$message.success('注册成功')
         //注册成功，跳转至登录页面
         this.$router.push('/login')

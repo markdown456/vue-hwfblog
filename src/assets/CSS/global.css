@@ -20,3 +20,48 @@ a {
 li {
     list-style: none;
 }
+
+.quill-editor {
+    min-height: 300px;
+}
+
+@media screen and (max-width: 870px) {
+    /* #hd {
+        width: 90%;
+    } */
+    #tubiao,
+    #ss {
+        display: none;
+    }
+    /* 导航栏 */
+    /* 窗口缩小时，btn显示 */
+    #btn {
+        display: block!important;
+        font-size: 30px;
+        color: #fff;
+        cursor: pointer;
+    }
+    #btn:hover {
+        color: #ccc;
+    }
+    #daohang {
+        display: flex;
+        width: 90%;
+    }
+    #daohangc {
+        width: 70px;
+        height: 42px;
+        line-height: 42px;
+    }
+    #ft {
+        height: 100px;
+        font-size: 12px;
+    }
+    #lbt {
+        display: none;
+    }
+    #selfIntro {
+        height: 150px;
+        font-size: 10px!important;
+    }
+}
