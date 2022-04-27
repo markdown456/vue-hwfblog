@@ -65,3 +65,11 @@ li {
         font-size: 10px!important;
     }
 }
+
+.dialog-footer {
+    margin: 24px 10px 0px 166px;
+}
+
+.el-dialog__body {
+    font-size: 20px;
+}

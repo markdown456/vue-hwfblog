@@ -6,7 +6,9 @@
         <el-input v-model="articleInfo.title"></el-input>
       </el-form-item>
       <el-form-item label="类型">
-        <el-input v-model="articleInfo.type"></el-input>
+        <el-select v-model="articleInfo.type" placeholder="请选择">
+          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="日期">
         <el-date-picker v-model="articleInfo.date" value-format="yyyy-MM-dd" type="date" placeholder="选择日期"> </el-date-picker>
@@ -48,6 +50,7 @@ export default {
         //富文本编辑器的内容
         content: '',
       },
+      //富文本编辑器配置
       editorOption: {
         placeholder: 'Hello World',
         modules: {
@@ -78,6 +81,17 @@ export default {
           },
         },
       },
+      // 文章类型选择框
+      options: [
+        {
+          value: 'art',
+          label: 'art',
+        },
+        {
+          value: 'note',
+          label: 'note',
+        },
+      ],
     }
   },
   created() {

@@ -17,7 +17,12 @@ import {
     MenuItemGroup,
     Table,
     TableColumn,
-    DatePicker
+    DatePicker,
+    Select,
+    Popconfirm,
+    Popover,
+    Dialog,
+
 } from 'element-ui'
 
 Vue.use(Button)
@@ -37,5 +42,8 @@ Vue.use(MenuItemGroup)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(DatePicker)
-
+Vue.use(Select)
+Vue.use(Popconfirm)
+Vue.use(Popover)
+Vue.use(Dialog)
 Vue.prototype.$message = Message;

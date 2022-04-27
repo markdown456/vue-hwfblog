@@ -72,6 +72,13 @@ export default {
   created() {
     this.activePath = window.sessionStorage.getItem('activePath')
     console.log(this.activePath)
+    let token = window.sessionStorage.getItem('token')
+    console.log(token);
+    console.log(typeof token);
+    if(!token) {
+      this.$router.push('/login')
+      
+    }
   },
   methods: {
     logout() {
